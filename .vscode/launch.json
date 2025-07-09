@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Test File in Test Directory",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}", 
+            "cwd": "${workspaceFolder}/test" //Required for subdirectory tests
+        }
+    ]
+}
