@@ -7,6 +7,14 @@
             "request": "launch",
             "program": "${file}", 
             "cwd": "${workspaceFolder}/test" //Required for subdirectory tests
+        },
+        {
+            "name": "Debug Pytest",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            // "args": ["test/test_code_review.py::test_validate_executionplan"],  // your test
+            "justMyCode": false
         }
     ]
 }
