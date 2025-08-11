@@ -41,7 +41,7 @@ jobs:
         pytest -vv --ctrf ./test/report.json
     
     - name: Publish Test Report
-      uses: actions/github-test-reporter@v1
+      uses: ctrf-io/github-test-reporter@v1
       with:
         report-path: './test/*.json'
         pull-request: true
