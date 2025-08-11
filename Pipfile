@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 pytest = "*"
 flake8 = "*"
+pytest-json-ctrf = "*"
 
 [dev-packages]
 
