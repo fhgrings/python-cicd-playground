@@ -73,3 +73,18 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: always()
+    - uses: trstringer/manual-approval@v1
+      with:
+        secret: ${{ github.TOKEN }}
+        approvers: fhgrings
+        minimum-approvals: 1
+        issue-title: "Deploying v1.3.5 to prod from staging"
+        issue-body: "Please approve or deny the deployment of version v1.3.5."
+        fail-on-denial: true
+        # issue-body-file-path: relative/file_path/wrt/repo/root
+        # exclude-workflow-initiator-as-approver: false
+        # additional-approved-words: ''
+        # additional-denied-words: ''
+    - name: Deploying to Prod
+      run: |
+        echo "Deploying to prod..."
