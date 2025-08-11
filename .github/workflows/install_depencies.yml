@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Check AWS Secrets availability
       run: |
-        echo "Checking AWS Secrets
+        echo "Checking AWS Secrets"
         
   test_n_lint:
     runs-on: ubuntu-latest
