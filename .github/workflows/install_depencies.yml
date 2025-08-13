@@ -50,12 +50,13 @@ jobs:
         retention-days: 7 # How long to keep the artifact (default is 90 days or repository setting)
   scan_secrets_n_vulns:
     runs-on: ubuntu-latest
-    needs: [check_secrets,test_n_lint]
+    needs: [test_n_lint]
     steps:
     - uses: github/codeql-action/init@v3
       with:
         languages: python
   report:
+    name: Reporting pytest
     runs-on: ubuntu-latest
     needs: [check_secrets,test_n_lint]
     steps:
@@ -73,6 +74,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       if: always()
+  deploy:
+    name: Deploy to env
+    runs-on: ubuntu-latest
+    needs: [report]
+    environment: 
+      name: dev
+    steps:
     - name: Deploying to Prod
       run: |
         echo "Deploying to prod..."
