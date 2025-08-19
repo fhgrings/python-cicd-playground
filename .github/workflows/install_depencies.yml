@@ -28,7 +28,7 @@ jobs:
     - name: Check AWS Secrets availability
       run: |
         echo "Checking AWS Secrets for ${{ vars.URL }}"
-        echo "Vars from define_variables ${{ needs.define_variables.outputs.url }}""
+        echo "Vars from define_variables ${{ needs.define_variables.outputs.url }}"
         
   test_n_lint:
     runs-on: ubuntu-latest
