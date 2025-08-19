@@ -15,9 +15,10 @@ jobs:
     environment: 
       name: dev
     outputs:
-      url: ${{ steps.test.outputs.url }}
+      url: ${{ steps.step1.outputs.url }}
     steps:
     - name: Set variables
+    - id: step1
       run: |
         echo "URL=${{ vars.URL }}" >> $GITHUB_OUTPUT
         
