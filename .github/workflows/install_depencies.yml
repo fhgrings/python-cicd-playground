@@ -14,10 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: 
       name: dev
+    outputs:
+      url: ${{ steps.set_value.outputs.url }}
     steps:
     - name: Set variables
       run: |
-        echo "URL=${{ vars.URL }}" >> $GITHUB_ENV
+        echo "URL=${{ vars.URL }}" >> $GITHUB_OUTPUT
         
   check_secrets:
     runs-on: ubuntu-latest
@@ -26,7 +28,7 @@ jobs:
     - name: Check AWS Secrets availability
       run: |
         echo "Checking AWS Secrets for ${{ vars.URL }}"
-        echo "Vars from define_variables ${{ env.URL }}"
+        echo "Vars from define_variables ${{ needs.define_variables.outputs.url }}""
         
   test_n_lint:
     runs-on: ubuntu-latest
