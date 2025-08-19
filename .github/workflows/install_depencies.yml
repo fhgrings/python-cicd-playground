@@ -17,7 +17,8 @@ jobs:
     outputs:
       url: ${{ steps.step1.outputs.url }}
     steps:
-    - id: step1
+    - name: Read output
+      id: step1
       run: |
         echo "URL=${{ vars.URL }}" >> $GITHUB_OUTPUT
         
