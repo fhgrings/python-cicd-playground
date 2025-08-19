@@ -21,6 +21,7 @@ jobs:
         
   check_secrets:
     runs-on: ubuntu-latest
+    needs: [define_variables]
     steps:
     - name: Check AWS Secrets availability
       run: |
