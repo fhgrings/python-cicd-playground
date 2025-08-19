@@ -12,10 +12,12 @@ permissions:
 jobs:
   check_secrets:
     runs-on: ubuntu-latest
+    environment: 
+      name: dev
     steps:
     - name: Check AWS Secrets availability
       run: |
-        echo "Checking AWS Secrets"
+        echo "Checking AWS Secrets for ${{ environment.name }}"
         
   test_n_lint:
     runs-on: ubuntu-latest
