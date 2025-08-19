@@ -8,16 +8,24 @@ on:
 
 permissions:
   contents: read
-
+  
 jobs:
-  check_secrets:
+  define_variables:
     runs-on: ubuntu-latest
     environment: 
       name: dev
     steps:
+    - name: Set variables
+      run: |
+        echo "URL=${{ vars.URL }}" >> $GITHUB_ENV
+        
+  check_secrets:
+    runs-on: ubuntu-latest
+    steps:
     - name: Check AWS Secrets availability
       run: |
         echo "Checking AWS Secrets for ${{ vars.URL }}"
+        echo "Vars from define_variables ${{ env.URL }}"
         
   test_n_lint:
     runs-on: ubuntu-latest
