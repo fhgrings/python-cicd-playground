@@ -15,7 +15,7 @@ jobs:
     environment: 
       name: dev
     outputs:
-      url: ${{ steps.set_value.outputs.url }}
+      url: ${{ steps.test.outputs.url }}
     steps:
     - name: Set variables
       run: |
