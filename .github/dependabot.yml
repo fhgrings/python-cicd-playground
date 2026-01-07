@@ -4,8 +4,84 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 
 version: 2
+
 updates:
-  - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # --- Python dependencies (weekly cadence) ---
+  - package-ecosystem: "pip"
+    directory: "/"                
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    open-pull-requests-limit: 10
+    rebase-strategy: "auto"
+    allow:
+      - dependency-type: "direct"
+    labels:
+      - "dependencies"
+      - "pip"
+      - "automated"
+    # Keep related deps together to reduce PR noise
+    groups:
+      aws-sdk:
+        patterns:
+          - "boto3"
+          - "botocore"
+          - "s3transfer"
+        update-types:
+          - "minor"
+          - "patch"
+      tooling:
+        patterns:
+          - "black"
+          - "flake8"
+          - "ruff"
+          - "isort"
+          - "mypy"
+        update-types:
+          - "minor"
+          - "patch"
+      testing:
+        patterns:
+          - "pytest"
+          - "pytest-*"
+          - "coverage"
+        update-types:
+          - "minor"
+          - "patch"
+      json-and-schema:
+        patterns:
+          - "jsonschema"
+          - "jsonschema-*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      - dependency-name: "boto3"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "botocore"
+        update-types: ["version-update:semver-major"]
+    pull-request-branch-name:
+      separator: "/"
+    commit-message:
+      prefix: "deps(pip)"
+      prefix-development: "deps(dev)"
+      include: "scope"   
+
+  # --- Python security updates (daily, fast-lane) ---
+  - package-ecosystem: "pip"
+    directory: "/"
     schedule:
       interval: "daily"
+    target-branch: "master"
+    open-pull-requests-limit: 10
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "security"
+      - "automated"
+    security-updates-only: true
+    pull-request-branch-name:
+      separator: "/"
+    commit-message:
+      prefix: "deps(security)"
+      include: "scope"
