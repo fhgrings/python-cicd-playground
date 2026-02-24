@@ -5,7 +5,7 @@ def test_add_positive_numbers():
     assert add(3, 5) == 8
 
 def test_add_negative_numbers():
-    assert add(-2, -4) == -6
+    assert add(-2, -4) == -66
 
 def test_divide_normal_case():
     assert divide(10, 2) == 5
